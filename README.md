@@ -1,40 +1,64 @@
-Multi-Level Local SGD simulation code
+### Multi-Level Local SGD simulation code
 
 Corresponding paper:
+```
     T. Castiglia, A. Das, and S. Patterson “Multi-Level Local SGD: Distributed SGD for Heterogeneous Hierarchical Networks” in ICLR, 2021
+```
+If you use the code base or refer to our paper, please use the following bibtex entry:
+```
+@inproceedings{
+castiglia2021multilevel,
+title={Multi-Level Local {SGD}: Distributed {SGD} for Heterogeneous Hierarchical Networks},
+author={Timothy Castiglia and Anirban Das and Stacy Patterson},
+booktitle={International Conference on Learning Representations},
+year={2021},
+url={https://openreview.net/forum?id=C70cp4Cn32}
+}
+```
 
+---
 This code is for simulating a multi-level network with
 heterogeneous workers, and running MLL-SGD to train a model
 on a set of data. The code is NOT for deployment purposes, and there
 is much room for optimization.
 
-One can install our environment with Anaconda:
-    conda create env -f flearn.yml 
+One can install our environment with all the dependencies with Anaconda:
+```shell
+conda create env -f flearn.yml 
+```
 
 Figure results seen in the paper are under the "images" folder.
 Raw data results can be found under the "results" folder.
 
 To rerun our experiments, run:
-    ./run_exps.sh
+```shell
+./run_exps.sh
+```
 The bash script currently runs all experiments
 sequentially. They can be run in parallel depending on your
-machine's available memory.
+machine's available memory or available gpus.
 
 To plot the results:
+```shell
     python plot_exps.py
+```
 
 One can also run MLL-SGD with your own parameters.
 mll_sgd.py help output with extra comments:
 
-usage: mll_sgd.py [-h] [--data [DATA]] [--model [MODEL]]
+Usage: 
+```shell
+mll_sgd.py [-h] [--data [DATA]] [--model [MODEL]]
                   [--hubs [HUBS]] [--workers [WORKERS]] [--tau [TAU]]
                   [--q [Q]] [--graph [GRAPH]] [--epochs [EPOCHS]]
                   [--batch [BATCH]] [--prob [PROB]] [--fed [FED]]
                   [--chance [CHANCE]]
+```
 
 Run Multi-Level Local SGD.
 
-optional arguments:
+Following are some optional arguments:
+```shell
   -h, --help           show this help message and exit
   --data [DATA]        dataset to use in training.
                            Value of 0 = MNIST data
@@ -69,3 +93,4 @@ optional arguments:
                            True  = Sub-networks receive either 5%, 10%, 20%, 25%, or 40% of the total dataset
   --chance [CHANCE]    Fixed probability of taking gradient step.
                            Only active when prob = 1.
+```
